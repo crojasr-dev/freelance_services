@@ -1,0 +1,108 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+    <div class="max-w-3xl mx-auto px-6 py-4 flex items-center gap-4">
+      <a
+        routerLink="/"
+        class="flex items-center justify-center w-9 h-9 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-500"
+        aria-label="Volver al sitio principal"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      </a>
+      <div>
+        <h1 class="text-lg font-bold text-gray-900 leading-tight">Gestión de Servicios</h1>
+        <p class="text-xs text-gray-500">Administra los servicios visibles en tu portafolio</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main id="main-content" class="max-w-3xl mx-auto px-6 py-8">
+    <p class="text-sm text-gray-500 mb-6">
+      Activa o desactiva cada servicio para controlar qué se muestra en la sección
+      <strong class="text-gray-700">Mis Servicios</strong> del portafolio.
+    </p>
+
+    <ul class="space-y-3" role="list" aria-label="Servicios del portafolio">
+      @for (service of services(); track service.id) {
+        <li
+          class="bg-white rounded-2xl border shadow-sm p-5 flex items-start gap-4 transition-colors"
+          [class.border-gray-100]="service.enabled"
+          [class.border-gray-200]="!service.enabled"
+          [class.opacity-60]="!service.enabled"
+        >
+          <!-- Icon -->
+          <div
+            class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors"
+            [class.bg-indigo-50]="service.enabled"
+            [class.bg-gray-100]="!service.enabled"
+            aria-hidden="true"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 transition-colors"
+              [class.text-indigo-600]="service.enabled"
+              [class.text-gray-400]="!service.enabled"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="service.iconPath" />
+            </svg>
+          </div>
+
+          <!-- Info -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+              <div class="flex items-center gap-2.5">
+                <h2 class="text-sm font-semibold text-gray-900">{{ service.title }}</h2>
+                <span
+                  class="text-xs font-medium px-2 py-0.5 rounded-full"
+                  [class.bg-green-100]="service.enabled"
+                  [class.text-green-700]="service.enabled"
+                  [class.bg-gray-100]="!service.enabled"
+                  [class.text-gray-500]="!service.enabled"
+                  [attr.aria-label]="service.enabled ? 'Servicio activo' : 'Servicio inactivo'"
+                >
+                  {{ service.enabled ? 'Activo' : 'Inactivo' }}
+                </span>
+              </div>
+
+              <!-- Toggle switch -->
+              <button
+                type="button"
+                role="switch"
+                [attr.aria-checked]="service.enabled"
+                [attr.aria-label]="(service.enabled ? 'Desactivar ' : 'Activar ') + service.title"
+                (click)="toggle(service.id)"
+                class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                [class.bg-indigo-600]="service.enabled"
+                [class.bg-gray-200]="!service.enabled"
+              >
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                  [class.translate-x-5]="service.enabled"
+                  [class.translate-x-0]="!service.enabled"
+                ></span>
+              </button>
+            </div>
+
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">{{ service.description }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </main>
+</div>

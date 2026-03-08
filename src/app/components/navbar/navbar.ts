@@ -1,0 +1,38 @@
+import { Component, ChangeDetectionStrategy, signal, afterNextRender } from '@angular/core';
+
+@Component({
+  selector: 'app-navbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './navbar.html',
+})
+export class Navbar {
+  isMenuOpen = signal(false);
+  isScrolled = signal(false);
+
+  protected readonly navItems = [
+    { label: 'Inicio', href: '#inicio' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Contacto', href: '#contacto' },
+  ];
+
+  constructor() {
+    afterNextRender(() => {
+      window.addEventListener(
+        'scroll',
+        () => {
+          this.isScrolled.set(window.scrollY > 60);
+        },
+        { passive: true },
+      );
+    });
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen.update((v) => !v);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
+  }
+}
