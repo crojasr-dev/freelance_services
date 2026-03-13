@@ -84,8 +84,8 @@ import { ContactService } from '../../services/contact.service';
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                     </svg>
                   </div>
-                  <h2 class="text-2xl font-bold text-white mb-2">¡Listo! Te contactamos hoy.</h2>
-                  <p class="text-gray-400">Revisamos tu caso y te respondemos por WhatsApp en menos de 24 horas.</p>
+                  <h2 class="text-2xl font-bold text-white mb-2">¡Mensaje Enviado Correctamente!</h2>
+                  <p class="text-gray-400">Recibirás respuesta lo antes posible.</p>
                 </div>
               } @else {
                 <div class="mb-6">
