@@ -9,6 +9,7 @@ const ENDPOINT_POWERPLATFORM =
   'https://0e26f4f012c5e35eb0d8c6b5a4dba0.e2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/258f4396ad404ec6a4fce7a19fff70f0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KjKDeZCZKJP0E8Lf-IzxaLeeRZUgx28mt88bfTSJLNI';
 
 export interface ConsultaHome {
+  origen: string;
   nombre: string;
   correo: string;
   asunto: string;
@@ -16,6 +17,7 @@ export interface ConsultaHome {
 }
 
 export interface ConsultaPowerPlatform {
+  origen: string;
   nombre: string;
   telefono: string;
   correo: string;

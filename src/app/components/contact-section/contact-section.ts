@@ -57,6 +57,7 @@ export class ContactSection {
 
     this.contactService
       .enviarConsultaHome({
+        origen: 'Home',
         nombre: name ?? '',
         correo: email ?? '',
         asunto: subject ?? '',

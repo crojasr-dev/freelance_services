@@ -413,6 +413,7 @@ export class PowerPlatform {
 
     this.contactService
       .enviarConsultaPowerPlatform({
+        origen: 'PowerPlatform',
         nombre: name ?? '',
         telefono: phone ?? '',
         correo: email ?? '',
