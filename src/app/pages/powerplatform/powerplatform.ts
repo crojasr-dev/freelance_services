@@ -131,8 +131,13 @@ import { ContactService } from '../../services/contact.service';
                       formControlName="phone"
                       autocomplete="tel"
                       placeholder="Ej: +56 9 1234 5678"
+                      [attr.aria-invalid]="isInvalid('phone')"
+                      aria-describedby="lead-phone-error"
                       [class]="fieldClass('phone')"
                     />
+                    @if (hasError('phone', 'pattern')) {
+                      <p id="lead-phone-error" class="mt-1 text-xs text-red-400" role="alert">Ingresa un teléfono válido (solo números, espacios y +).</p>
+                    }
                   </div>
 
                   <!-- Correo electrónico -->
@@ -194,10 +199,6 @@ import { ContactService } from '../../services/contact.service';
                       Quiero mi asesoría gratis →
                     }
                   </button>
-
-                  <p class="text-center text-gray-500 text-xs">
-                    Sin costo. Sin obligación. Respuesta en menos de 24 horas.
-                  </p>
 
                   @if (submitError()) {
                     <div class="flex items-start gap-3 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3" role="alert" aria-live="polite">
@@ -395,7 +396,7 @@ export class PowerPlatform {
 
   leadForm = this.fb.group({
     name: ['', Validators.required],
-    phone: [''],
+    phone: ['', Validators.pattern(/^[+\d\s\-()]{7,20}$/)],
     email: ['', [Validators.required, Validators.email]],
     need: ['', Validators.required],
   });
