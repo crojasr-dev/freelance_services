@@ -5,8 +5,7 @@ import { catchError, map, throwError } from 'rxjs';
 const ENDPOINT_HOME =
   'https://0e26f4f012c5e35eb0d8c6b5a4dba0.e2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/786c901f96b44f3bb0ca1698ab48c66b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-OnqsH8q4U3ENwE94W0NjjqcdBdnMAS2VtcP0P_arXU';
 
-const ENDPOINT_POWERPLATFORM =
-  'https://0e26f4f012c5e35eb0d8c6b5a4dba0.e2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/258f4396ad404ec6a4fce7a19fff70f0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KjKDeZCZKJP0E8Lf-IzxaLeeRZUgx28mt88bfTSJLNI';
+const ENDPOINT_POWERPLATFORM = ENDPOINT_HOME;
 
 export interface ConsultaHome {
   origen: string;
