@@ -78,11 +78,6 @@ export class ContactSection {
       });
   }
 
-  resetForm(): void {
-    this.submitted.set(false);
-    this.submitError.set(null);
-  }
-
   hasError(field: string, error: string): boolean {
     const control = this.contactForm.get(field);
     return !!(control?.hasError(error) && control.touched);

@@ -43,6 +43,7 @@ export class Home {
     this.metaSvc.updateTag({ name: 'twitter:url', content: url });
     this.metaSvc.updateTag({ name: 'twitter:title', content: 'devman.cl | Desarrollo de Soluciones Digitales' });
     this.metaSvc.updateTag({ name: 'twitter:description', content: 'Sitios web profesionales, aplicaciones y automatizaciones con Microsoft Power Platform a medida para pymes y startups.' });
+    this.metaSvc.updateTag({ property: 'og:locale', content: 'es_CL' });
     this.setCanonical(url);
   }
 

@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 
 @Component({
-  selector: 'app-powerapps',
+  selector: 'app-powerplatform',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, RouterLink],
   template: `
@@ -14,7 +14,7 @@ import { ContactService } from '../../services/contact.service';
     <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur border-b border-white/5" role="banner">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a [routerLink]="['/']" class="text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-indigo-400 rounded" aria-label="Ir al inicio">
-          <span class="text-indigo-600">Dev</span><span class="text-white">man</span>
+          <span class="text-indigo-600">devman</span><span class="text-white">.cl</span>
         </a>
         <a
           [routerLink]="[]" fragment="formulario"
@@ -365,16 +365,17 @@ export class PowerPlatform {
 
   constructor() {
     const url = 'https://devman.cl/powerplatform';
-    this.titleSvc.setTitle('Microsoft Power Platform para pymes | devman.cl');
+    this.titleSvc.setTitle('devman.cl | Consultoría en Microsoft Power Platform');
     this.metaSvc.updateTag({ name: 'description', content: 'Consultoría y desarrollo con Microsoft Power Platform para pymes y startups. Power Apps, Power Automate, Power BI y Power Pages. Primera asesoría gratuita y sin compromiso.' });
     this.metaSvc.updateTag({ property: 'og:type', content: 'website' });
     this.metaSvc.updateTag({ property: 'og:url', content: url });
-    this.metaSvc.updateTag({ property: 'og:title', content: 'Microsoft Power Platform para pymes | devman.cl' });
+    this.metaSvc.updateTag({ property: 'og:title', content: 'devman.cl | Consultoría en Microsoft Power Platform' });
     this.metaSvc.updateTag({ property: 'og:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Aplicaciones, automatizaciones y paneles de datos a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
     this.metaSvc.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.metaSvc.updateTag({ name: 'twitter:url', content: url });
-    this.metaSvc.updateTag({ name: 'twitter:title', content: 'Microsoft Power Platform para pymes | devman.cl' });
+    this.metaSvc.updateTag({ name: 'twitter:title', content: 'devman.cl | Consultoría en Microsoft Power Platform' });
     this.metaSvc.updateTag({ name: 'twitter:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Aplicaciones, automatizaciones y paneles de datos a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
+    this.metaSvc.updateTag({ property: 'og:locale', content: 'es_CL' });
     this.setCanonical(url);
   }
 
