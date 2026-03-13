@@ -78,7 +78,7 @@ export const SERVICES: Service[] = [
     id: 'web-site',
     title: 'Sitios Web',
     description:
-      'Diseño y desarrollo de sitios web profesionales, modernos y optimizados para buscadores.',
+      'Diseño y desarrollo tu sitio web desde cero: profesional, moderno y optimizado para que tus clientes te encuentren en Google.',
     iconPath:
       'M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418',
     features: [
@@ -94,7 +94,7 @@ export const SERVICES: Service[] = [
     id: 'web-app',
     title: 'Aplicaciones Web',
     description:
-      'Desarrollo de aplicaciones web complejas y escalables adaptadas a los procesos de tu negocio.',
+      'Desarrollo aplicaciones web a medida, escalables y adaptadas exactamente a los procesos de tu negocio.',
     iconPath: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
     features: [
       'Arquitectura escalable y mantenible',
@@ -107,17 +107,18 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'power-apps',
-    title: 'Power Apps',
+    title: 'Microsoft Power Platform',
+    ctaLink: '/powerplatform',
     description:
-      'Desarrollo de aplicaciones empresariales low-code adaptadas a los procesos de tu organización.',
+      'Te ayudo a automatizar procesos, crear aplicaciones y visualizar los datos de tu negocio usando las herramientas de Microsoft, sin pagar licencias costosas de software.',
     iconPath:
       'M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 9 1.5 1.5 3-3',
     features: [
-      'Canvas Apps para interfaces personalizadas',
-      'Model-Driven Apps con lógica de negocio',
-      'Conectores a más de 1000 servicios',
-      'Integración con Microsoft 365 y Dataverse',
-      'Aplicaciones responsivas para móvil y escritorio',
+      'Power Apps: apps a medida para tu equipo',
+      'Power Automate: flujos que trabajan solos',
+      'Power BI: reportes y dashboards en tiempo real',
+      'Power Pages: portales web para clientes o proveedores',
+      'Integración nativa con Microsoft 365 y SharePoint',
     ],
     enabled: true,
   },

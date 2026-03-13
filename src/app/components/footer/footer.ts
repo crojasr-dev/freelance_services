@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PortfolioService } from '../../services/portfolio.service';
 
 @Component({
   selector: 'app-footer',
@@ -21,7 +22,7 @@ import { RouterLink } from '@angular/router';
         <div class="flex items-center gap-6">
           <nav aria-label="Navegación del pie de página">
             <ul class="flex items-center gap-6" role="list">
-              @for (link of footerLinks; track link.href) {
+              @for (link of footerLinks(); track link.href) {
                 <li>
                   <a
                     [href]="link.href"
@@ -67,10 +68,12 @@ import { RouterLink } from '@angular/router';
   `,
 })
 export class Footer {
-  protected readonly footerLinks = [
+  private readonly portfolioService = inject(PortfolioService);
+
+  protected readonly footerLinks = computed(() => [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Servicios', href: '#servicios' },
-    { label: 'Proyectos', href: '#proyectos' },
+    ...(this.portfolioService.showProjects() ? [{ label: 'Proyectos', href: '#proyectos' }] : []),
     { label: 'Contacto', href: '#contacto' },
-  ];
+  ]);
 }

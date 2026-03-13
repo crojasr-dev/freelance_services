@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, signal, afterNextRender } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, signal, afterNextRender } from '@angular/core';
+import { PortfolioService } from '../../services/portfolio.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,15 +7,16 @@ import { Component, ChangeDetectionStrategy, signal, afterNextRender } from '@an
   templateUrl: './navbar.html',
 })
 export class Navbar {
+  private readonly portfolioService = inject(PortfolioService);
   isMenuOpen = signal(false);
   isScrolled = signal(false);
 
-  protected readonly navItems = [
+  protected readonly navItems = computed(() => [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Servicios', href: '#servicios' },
-    { label: 'Proyectos', href: '#proyectos' },
+    ...(this.portfolioService.showProjects() ? [{ label: 'Proyectos', href: '#proyectos' }] : []),
     { label: 'Contacto', href: '#contacto' },
-  ];
+  ]);
 
   constructor() {
     afterNextRender(() => {

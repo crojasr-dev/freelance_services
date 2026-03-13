@@ -33,11 +33,12 @@
 
         <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
           Construyo soluciones digitales a medida: sitios web profesionales,
-          aplicaciones web escalables y aplicaciones de escritorio de alto rendimiento.
+          aplicaciones web escalables y soluciones en Microsft Power Platform.
         </p>
 
         <!-- CTA Buttons -->
         <div class="flex flex-wrap gap-4 mb-12">
+          @if (showProjects()) {
           <a
             href="#proyectos"
             class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/40 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-indigo-400"
@@ -47,6 +48,7 @@
               <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
             </svg>
           </a>
+          }
           <a
             href="#contacto"
             class="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-white/5 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-white/50"

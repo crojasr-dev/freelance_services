@@ -19,6 +19,7 @@ export interface Service {
   iconPath: string;
   features: string[];
   enabled: boolean;
+  ctaLink?: string;
 }
 
 export interface CategoryFilter {

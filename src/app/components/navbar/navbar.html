@@ -9,7 +9,7 @@
     <!-- Logo -->
     <a
       href="#inicio"
-      class="text-xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-indigo-600 rounded"
+      class="text-2xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-indigo-600 rounded"
       aria-label="Ir al inicio"
     >
       <span class="text-indigo-600">Dev</span><span [class]="isScrolled() ? 'text-gray-900' : 'text-white'">man</span>
@@ -18,7 +18,7 @@
     <!-- Desktop Navigation -->
     <nav aria-label="Navegación principal" class="hidden md:block">
       <ul class="flex items-center gap-8" role="list">
-        @for (item of navItems; track item.href) {
+        @for (item of navItems(); track item.href) {
           <li>
             <a
               [href]="item.href"
@@ -73,7 +73,7 @@
       class="md:hidden bg-white border-t border-gray-100 shadow-lg"
     >
       <ul class="flex flex-col py-2" role="list">
-        @for (item of navItems; track item.href) {
+        @for (item of navItems(); track item.href) {
           <li>
             <a
               [href]="item.href"

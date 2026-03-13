@@ -1,9 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
 import { Hero } from '../../components/hero/hero';
 import { ServicesSection } from '../../components/services-section/services-section';
 import { ProjectsSection } from '../../components/projects-section/projects-section';
 import { ContactSection } from '../../components/contact-section/contact-section';
 import { Footer } from '../../components/footer/footer';
+import { PortfolioService } from '../../services/portfolio.service';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +16,42 @@ import { Footer } from '../../components/footer/footer';
     <main id="main-content">
       <app-hero />
       <app-services-section />
-      <app-projects-section />
+      @if (showProjects()) {
+        <app-projects-section />
+      }
       <app-contact-section />
       <app-footer />
     </main>
   `,
 })
-export class Home {}
+export class Home {
+  private readonly portfolioService = inject(PortfolioService);
+  protected readonly showProjects = this.portfolioService.showProjects;
+  private titleSvc = inject(Title);
+  private metaSvc = inject(Meta);
+  private doc = inject(DOCUMENT);
+
+  constructor() {
+    const url = 'https://devman.cl';
+    this.titleSvc.setTitle('Cristian Rojas | Desarrollador freelance · Power Platform & Web');
+    this.metaSvc.updateTag({ name: 'description', content: 'Desarrollador freelance especializado en Microsoft Power Platform y desarrollo web. Creo aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.metaSvc.updateTag({ property: 'og:type', content: 'website' });
+    this.metaSvc.updateTag({ property: 'og:url', content: url });
+    this.metaSvc.updateTag({ property: 'og:title', content: 'Cristian Rojas | Desarrollador freelance · Power Platform & Web' });
+    this.metaSvc.updateTag({ property: 'og:description', content: 'Aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.metaSvc.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaSvc.updateTag({ name: 'twitter:title', content: 'Cristian Rojas | Desarrollador freelance · Power Platform & Web' });
+    this.metaSvc.updateTag({ name: 'twitter:description', content: 'Aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.setCanonical(url);
+  }
+
+  private setCanonical(url: string): void {
+    let link = this.doc.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = this.doc.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.doc.head.appendChild(link);
+    }
+    link.setAttribute('href', url);
+  }
+}
