@@ -33,15 +33,16 @@ export class Home {
 
   constructor() {
     const url = 'https://devman.cl';
-    this.titleSvc.setTitle('Cristian Rojas | Desarrollador freelance · Power Platform & Web');
-    this.metaSvc.updateTag({ name: 'description', content: 'Desarrollador freelance especializado en Microsoft Power Platform y desarrollo web. Creo aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.titleSvc.setTitle('devman.cl | Desarrollo de Soluciones Digitales');
+    this.metaSvc.updateTag({ name: 'description', content: 'Desarrollo de soluciones digitales a medida: sitios web profesionales, aplicaciones web y automatizaciones con Microsoft Power Platform para pymes y startups.' });
     this.metaSvc.updateTag({ property: 'og:type', content: 'website' });
     this.metaSvc.updateTag({ property: 'og:url', content: url });
-    this.metaSvc.updateTag({ property: 'og:title', content: 'Cristian Rojas | Desarrollador freelance · Power Platform & Web' });
-    this.metaSvc.updateTag({ property: 'og:description', content: 'Aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.metaSvc.updateTag({ property: 'og:title', content: 'devman.cl | Desarrollo de Soluciones Digitales' });
+    this.metaSvc.updateTag({ property: 'og:description', content: 'Sitios web profesionales, aplicaciones y automatizaciones con Microsoft Power Platform a medida para pymes y startups.' });
     this.metaSvc.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.metaSvc.updateTag({ name: 'twitter:title', content: 'Cristian Rojas | Desarrollador freelance · Power Platform & Web' });
-    this.metaSvc.updateTag({ name: 'twitter:description', content: 'Aplicaciones, automatizaciones y sitios web a medida para pymes y startups.' });
+    this.metaSvc.updateTag({ name: 'twitter:url', content: url });
+    this.metaSvc.updateTag({ name: 'twitter:title', content: 'devman.cl | Desarrollo de Soluciones Digitales' });
+    this.metaSvc.updateTag({ name: 'twitter:description', content: 'Sitios web profesionales, aplicaciones y automatizaciones con Microsoft Power Platform a medida para pymes y startups.' });
     this.setCanonical(url);
   }
 

@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: 'powerplatform',
-    loadComponent: () => import('./pages/powerapps/powerapps').then((m) => m.PowerApps),
+    loadComponent: () => import('./pages/powerplatform/powerplatform').then((m) => m.PowerPlatform),
   },
 {
     path: '**',

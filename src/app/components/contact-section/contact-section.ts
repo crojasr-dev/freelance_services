@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact-section',
@@ -9,9 +10,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class ContactSection {
   private fb = inject(FormBuilder);
+  private contactService = inject(ContactService);
 
   submitted = signal(false);
   isSubmitting = signal(false);
+  submitError = signal<string | null>(null);
 
   contactForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -46,17 +49,37 @@ export class ContactSection {
       this.contactForm.markAllAsTouched();
       return;
     }
+
     this.isSubmitting.set(true);
-    // Simulate async submission
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.submitted.set(true);
-      this.contactForm.reset();
-    }, 1200);
+    this.submitError.set(null);
+
+    const { name, email, subject, message } = this.contactForm.value;
+
+    this.contactService
+      .enviarConsultaHome({
+        nombre: name ?? '',
+        correo: email ?? '',
+        asunto: subject ?? '',
+        mensaje: message ?? '',
+      })
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          this.submitted.set(true);
+          this.contactForm.reset();
+        },
+        error: () => {
+          this.isSubmitting.set(false);
+          this.submitError.set(
+            'No se pudo enviar el mensaje. Por favor inténtalo de nuevo o contáctame directamente.',
+          );
+        },
+      });
   }
 
   resetForm(): void {
     this.submitted.set(false);
+    this.submitError.set(null);
   }
 
   hasError(field: string, error: string): boolean {

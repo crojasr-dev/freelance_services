@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-powerapps',
@@ -11,7 +12,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <!-- ─── Header mínimo ─── -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur border-b border-white/5" role="banner">
-      <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a [routerLink]="['/']" class="text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-indigo-400 rounded" aria-label="Ir al inicio">
           <span class="text-indigo-600">Dev</span><span class="text-white">man</span>
         </a>
@@ -36,7 +37,7 @@ import { RouterLink } from '@angular/router';
           <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-violet-600/20 blur-3xl"></div>
         </div>
 
-        <div class="relative max-w-6xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-16 items-center">
+        <div class="relative max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-16 items-center">
 
           <!-- Izquierda: mensaje -->
           <div>
@@ -197,6 +198,15 @@ import { RouterLink } from '@angular/router';
                   <p class="text-center text-gray-500 text-xs">
                     Sin costo. Sin obligación. Respuesta en menos de 24 horas.
                   </p>
+
+                  @if (submitError()) {
+                    <div class="flex items-start gap-3 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3" role="alert" aria-live="polite">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                      </svg>
+                      <p class="text-red-400 text-sm">{{ submitError() }}</p>
+                    </div>
+                  }
                 </form>
               }
             </div>
@@ -341,14 +351,12 @@ import { RouterLink } from '@angular/router';
     <!-- ─── Footer mínimo ─── -->
     <footer class="bg-slate-950 border-t border-white/5 py-6" role="contentinfo">
       <div class="max-w-5xl mx-auto px-6 text-center">
-        <p class="text-gray-600 text-sm">
-          &copy; 2026 Cristian Rojas R. · Consultoría Microsoft Power Platform
-        </p>
+        <p class="text-gray-600 text-sm">&copy; 2026 devman.cl · Consultoría Microsoft Power Platform</p>
       </div>
     </footer>
   `,
 })
-export class PowerApps {
+export class PowerPlatform {
   private fb = inject(FormBuilder);
   private titleSvc = inject(Title);
   private metaSvc = inject(Meta);
@@ -356,15 +364,16 @@ export class PowerApps {
 
   constructor() {
     const url = 'https://devman.cl/powerplatform';
-    this.titleSvc.setTitle('Microsoft Power Platform | Consultoría y desarrollo para pymes');
-    this.metaSvc.updateTag({ name: 'description', content: 'Creo aplicaciones, automatizaciones y paneles de datos con Microsoft Power Platform para pymes y startups. Power Apps, Power Automate, Power BI y Power Pages. Primera asesoría gratuita.' });
+    this.titleSvc.setTitle('Microsoft Power Platform para pymes | devman.cl');
+    this.metaSvc.updateTag({ name: 'description', content: 'Consultoría y desarrollo con Microsoft Power Platform para pymes y startups. Power Apps, Power Automate, Power BI y Power Pages. Primera asesoría gratuita y sin compromiso.' });
     this.metaSvc.updateTag({ property: 'og:type', content: 'website' });
     this.metaSvc.updateTag({ property: 'og:url', content: url });
-    this.metaSvc.updateTag({ property: 'og:title', content: 'Microsoft Power Platform | Consultoría y desarrollo para pymes' });
-    this.metaSvc.updateTag({ property: 'og:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Soluciones a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
+    this.metaSvc.updateTag({ property: 'og:title', content: 'Microsoft Power Platform para pymes | devman.cl' });
+    this.metaSvc.updateTag({ property: 'og:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Aplicaciones, automatizaciones y paneles de datos a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
     this.metaSvc.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.metaSvc.updateTag({ name: 'twitter:title', content: 'Microsoft Power Platform | Consultoría y desarrollo para pymes' });
-    this.metaSvc.updateTag({ name: 'twitter:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Soluciones a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
+    this.metaSvc.updateTag({ name: 'twitter:url', content: url });
+    this.metaSvc.updateTag({ name: 'twitter:title', content: 'Microsoft Power Platform para pymes | devman.cl' });
+    this.metaSvc.updateTag({ name: 'twitter:description', content: 'Digitaliza tu negocio sin pagar una fortuna. Aplicaciones, automatizaciones y paneles de datos a medida con Power Apps, Power Automate, Power BI y Power Pages.' });
     this.setCanonical(url);
   }
 
@@ -378,8 +387,11 @@ export class PowerApps {
     link.setAttribute('href', url);
   }
 
+  private readonly contactService = inject(ContactService);
+
   submitted = signal(false);
   isSubmitting = signal(false);
+  submitError = signal<string | null>(null);
 
   leadForm = this.fb.group({
     name: ['', Validators.required],
@@ -393,11 +405,32 @@ export class PowerApps {
       this.leadForm.markAllAsTouched();
       return;
     }
+
     this.isSubmitting.set(true);
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.submitted.set(true);
-    }, 1000);
+    this.submitError.set(null);
+
+    const { name, phone, email, need } = this.leadForm.value;
+
+    this.contactService
+      .enviarConsultaPowerPlatform({
+        nombre: name ?? '',
+        telefono: phone ?? '',
+        correo: email ?? '',
+        necesidad: need ?? '',
+      })
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          this.submitted.set(true);
+          this.leadForm.reset();
+        },
+        error: () => {
+          this.isSubmitting.set(false);
+          this.submitError.set(
+            'No se pudo enviar tu solicitud. Por favor inténtalo de nuevo.',
+          );
+        },
+      });
   }
 
   isInvalid(field: string): boolean | null {
